@@ -27,28 +27,25 @@ app.post("/", (req, res) => {
       },
     ],
   };
-  
+
   const jsonData = JSON.stringify(data);
-  const url = "https://us21.api.mailchimp.com/3.0/lists/b1871862c4";
-    const options = {
-        method: "POST",
-        auth: "niladri:96578846d2f2989f52a9f9a5d2c35b71-us21"
+  const url = "https://us21.api.mailchimp.com/3.0/lists/b1871862c4"; //give your own list ID and url = https://usX.api.mailchimp.com/3.0/lists/
+  const options = {
+    method: "POST",
+    auth: "niladri:96578846d2f2989f52a9f9a5d2c35b71-us21", //give your own API key
+  };
+  const request = https.request(url, options, (response) => {
+    response.on("data", (data) => {
+      console.log(JSON.parse(data));
+    });
+    if (response.statusCode === 200) {
+      res.sendFile(__dirname + "/success.html");
+    } else {
+      res.sendFile(__dirname + "/failure.html");
     }
-    const request = https.request(url, options, (response) => {
-        response.on("data", (data) => {
-            console.log(JSON.parse(data));
-        })
-        if (response.statusCode === 200) {
-          res.sendFile(__dirname + "/success.html");
-        }
-        else { 
-          res.sendFile(__dirname + "/failure.html");
-        }
-    }
-    )
-    request.write(jsonData);
-    request.end();
-    
+  });
+  request.write(jsonData);
+  request.end();
 });
 
 app.post("/failure", (req, res) => {
