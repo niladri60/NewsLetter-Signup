@@ -29,10 +29,10 @@ app.post("/", (req, res) => {
   };
 
   const jsonData = JSON.stringify(data);
-  const url = "https://us21.api.mailchimp.com/3.0/lists/b1871862c4"; //give your own list ID and url = https://usX.api.mailchimp.com/3.0/lists/
+  const url = "https://usX.api.mailchimp.com/3.0/lists/(LIST_ID)"; //give your own list ID and url = https://usX.api.mailchimp.com/3.0/lists/list ID
   const options = {
     method: "POST",
-    auth: "niladri:96578846d2f2989f52a9f9a5d2c35b71-us21", //give your own API key
+    auth: "niladri:API_KEY", //give your own API key
   };
   const request = https.request(url, options, (response) => {
     response.on("data", (data) => {
@@ -55,6 +55,3 @@ app.post("/failure", (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server running on port 3000");
 });
-
-// API key: 96578846d2f2989f52a9f9a5d2c35b71-us21
-// Audience ID: b1871862c4
