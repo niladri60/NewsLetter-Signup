@@ -4,7 +4,7 @@ const app = express();
 const https = require("https");
 
 app.use(express.static("public"));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true })); //for using the public folder.
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/signup.html");
@@ -29,10 +29,10 @@ app.post("/", (req, res) => {
   };
 
   const jsonData = JSON.stringify(data);
-  const url = "https://usX.api.mailchimp.com/3.0/lists/(LIST_ID)"; //give your own list ID and url = https://usX.api.mailchimp.com/3.0/lists/list ID
+  const url = "https://us21.api.mailchimp.com/3.0/lists/b1871862c4"; //give your own list ID and url = https://usX.api.mailchimp.com/3.0/lists/list ID
   const options = {
     method: "POST",
-    auth: "niladri:API_KEY", //give your own API key
+    auth: "niladri:166f693ce4c8fabedaee7b02bf7d2090-us21", //give your own API key
   };
   const request = https.request(url, options, (response) => {
     response.on("data", (data) => {
